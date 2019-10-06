@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <my-input></my-input>
+    </div>
+</body>
+<script>
+   var MyInput = {
+       template:`<div><button @click="addclick">+</button><input type="text" v-model="num" v-focus v-html="msg"><button @click="reduceclick">-</button></div>`,
+       data(){
+           return{
+               num:'1'
+           }
+       },
+       methods:{
+           addclick(){
+               this.num++
+           },
+           reduceclick(){
+               if(this.num>1)
+                   this.num--;
+               else
+                   alert("数量为1，不能再减")
+           }
+       },
+       directives: {
+           focus:function (element) {
+               element.focus();
+           }
+       },
+       computed:{
+           msg(){
+               var reg = new RegExp(/^[1-9]\d*$/);
+               if (!reg.test(this.num)){
+                   alert('输入数据不合法');
+                   focus();
+                   this.num=1;
+               }
+               else if(this.num<0){
+                   alert('输入数据不合法');
+                   focus();
+                   this.num=1;
+               }
+           }
+       }
+   }
+   new Vue({
+       el:'#app',
+       components:{
+           'my-input':MyInput
+       }
+   })
+</script>
+</html>

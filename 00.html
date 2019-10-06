@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <my-input></my-input>
+</div>
+</body>
+<script>
+    var MyInput={
+        template:`
+          <div><button @click="doclick" :style="style1" @mouseover="mouseOver"  @mouseleave="mouseLeave">{{tex}}</button></div>
+        `,
+        data(){
+          return{
+              tex:"点击我",
+              style1:'background:while;width:100px;height:35px;border:1px solid blue'
+          }
+        },
+        methods:{
+            doclick(){
+                alert(this.tex)
+            },
+            mouseOver(){
+                this.style1 = 'background: blue;color: white;width:100px;height:35px;border:1px solid blue';
+            },
+            mouseLeave(){
+                this.style1 = 'width:100px;height:35px;border:1px solid blue'
+            }
+        }
+    }
+    new Vue({
+        el:'#app',
+        components:{
+            'my-input':MyInput
+        }
+    })
+</script>
+</html>

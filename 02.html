@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue.js"></script>
+    <style>
+        body{margin:0;}
+        ul{margin:0; padding:0; list-style:none; overflow:hidden;}
+        .box{ width:500px; border:1px #000 solid;}
+        li{width:100px; float:left; background-color:#6FF; height:50px; line-height:50px; text-align:center; cursor:pointer;}
+        li.active{background-color:#fff;}
+        .box .content{height:50px; padding:50px;}
+    </style>
+</head>
+<body>
+<div class="box">
+    <cwt-tab :cities="cities1" :contents="contents1" :n="n"></cwt-tab>
+    <cwt-tab :cities="cities2" :contents="contents2" :n="n"></cwt-tab>
+</div>
+</body>
+<script>
+    Vue.component('cwt-tab',{
+        props : ['cities','contents','n'],
+        data(){
+            return {
+                value : this.n
+            }
+        },
+        template:` <div class="box">
+                        <ul>
+                            <li v-for="city,index of cities"
+                            :class="{active:index==value}"
+                            @mouseover="choose(index)">{{city}}</li>
+                        </ul>
+                        <div class="content">{{contents[value]}}</div>
+                   </div>`,
+        methods : {
+            choose (index){
+                this.value = index;
+            }
+        }
+    })
+    new Vue({
+        el : ".box",
+        data : {
+            cities1 : ["京东超市","数码电器","服饰美妆","京东生鲜"],
+            contents1 : ["这是超市的内容","这是数码的内容","这是服装的内容","这是生鲜的内容"],
+            n : 0,
+            cities2 : ["选项1","选项2","选项3"],
+            contents2 : ["这是选项1的内容","这是选项2的内容","这是选项3的内容"]
+        }
+    })
+</script>
+</html>
